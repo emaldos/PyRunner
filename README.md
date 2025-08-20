@@ -44,7 +44,7 @@ git clone https://github.com/emaldos/PyRunner.git
 cd PyRunner
 
 # Make it executable
-chmod +x pyrunner.py
+sudo chmod +x pyrunner.py
 
 # Add to system PATH (use PyRunner anywhere)
 sudo ln -s $(pwd)/pyrunner.py /usr/local/bin/pyrunner
