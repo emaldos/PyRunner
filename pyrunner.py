@@ -3,8 +3,6 @@
 import argparse, json, logging, os, subprocess, sys
 import time, venv, hashlib, threading, shutil 
 import concurrent.futures
-import signal
-import pkg_resources
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Set
 import yaml
