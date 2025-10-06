@@ -125,8 +125,11 @@ echo "PyRunner reinstalled and launchers refreshed."
 
 ```bash
 sudo bash -c 'set -euo pipefail
+# Remove launchers and executables
 rm -f /usr/local/bin/pyrunner /usr/local/bin/pyrunner-gui /usr/local/bin/pyrunner.py /usr/local/bin/pyrunner-gui.py
-echo "PyRunner fully removed."
+# Remove runtime data and configs if present
+rm -rf /usr/local/bin/pyrunner_gui_env /usr/local/bin/pyrunner_gui.yaml
+echo "PyRunner fully removed (executables + GUI runtime files)."
 '
 ```
 
