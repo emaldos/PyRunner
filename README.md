@@ -1,7 +1,3 @@
-Here’s an updated **README.md** that matches your current GUI (with the **Config Maker** form, no YAML editor/templates), plus cleaner install steps that copy **both** `pyrunner.py` and `pyrunner_gui.py` into a single folder under `/usr/local/bin/pyrunner/`, and add tidy launchers.
-
----
-
 # 🚀 PyRunner
 
 [![Python Version](https://img.shields.io/badge/python-3.7%2B-blue.svg)](https://python.org)
