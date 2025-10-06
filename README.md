@@ -70,102 +70,95 @@ pyrunner --gui
 
 ---
 
+
 ## 📥 Installation
 
-### Option 1: Tidy system install (recommended)
+### Option 1: System-wide install (recommended)
 
-This keeps `/usr/local/bin` clean by placing both files in **one folder** and creating two small launchers.
+This version installs **both executables directly in `/usr/local/bin`**
+and creates convenient launchers — `pyrunner` and `pyrunner-gui`.
 
 ```bash
-# Clone
+# Clone (from a writable directory, e.g. ~/)
 git clone https://github.com/emaldos/PyRunner.git
 cd PyRunner
 
-# Ensure executables
-sudo chmod +x pyrunner.py pyrunner_gui.py
+# Install directly to /usr/local/bin
+sudo install -m 755 pyrunner.py /usr/local/bin/pyrunner.py
+sudo install -m 755 pyrunner_gui.py /usr/local/bin/pyrunner-gui.py
 
-# Create a tidy folder in /usr/local/bin and copy both scripts there
-sudo mkdir -p /usr/local/bin/pyrunner
-sudo cp pyrunner.py pyrunner_gui.py /usr/local/bin/pyrunner/
+# Create launchers
+sudo ln -sf /usr/local/bin/pyrunner.py /usr/local/bin/pyrunner
+sudo ln -sf /usr/local/bin/pyrunner-gui.py /usr/local/bin/pyrunner-gui
 
-# Make sure they are executable there too
-sudo chmod +x /usr/local/bin/pyrunner/pyrunner.py /usr/local/bin/pyrunner/pyrunner_gui.py
-
-# Create launchers:
-# 1) 'pyrunner' -> CLI (also accepts --gui)
-sudo ln -sf /usr/local/bin/pyrunner/pyrunner.py /usr/local/bin/pyrunner
-
-# 2) 'pyrunner-gui' -> direct GUI entry (optional convenience)
-sudo ln -sf /usr/local/bin/pyrunner/pyrunner_gui.py /usr/local/bin/pyrunner-gui
+# Verify
+pyrunner --version
+pyrunner --gui
 ```
 
 Now you can run:
 
 ```bash
-pyrunner --version
 pyrunner --gui
 pyrunner-gui
 ```
 
-### Reinstall / overwrite if an older install exists
+---
+
+### 🔄 Reinstall / Overwrite
 
 ```bash
-# Reinstall (idempotent): removes any old install/symlinks, then re-copies and relinks
+# Clean reinstall (idempotent)
 sudo bash -c 'set -euo pipefail
-DEST="/usr/local/bin/pyrunner"; CLI="/usr/local/bin/pyrunner"; GUI="/usr/local/bin/pyrunner-gui"
-rm -f "$CLI" "$GUI"
-rm -rf "$DEST"
-mkdir -p "$DEST"
-cp pyrunner.py pyrunner_gui.py "$DEST/"
-chmod +x "$DEST/pyrunner.py" "$DEST/pyrunner_gui.py"
-ln -sf "$DEST/pyrunner.py" "$CLI"
-ln -sf "$DEST/pyrunner_gui.py" "$GUI"
-echo "PyRunner reinstalled to $DEST and launchers updated: $CLI, $GUI"
+rm -f /usr/local/bin/pyrunner /usr/local/bin/pyrunner-gui /usr/local/bin/pyrunner.py /usr/local/bin/pyrunner-gui.py
+install -m 755 pyrunner.py /usr/local/bin/pyrunner.py
+install -m 755 pyrunner_gui.py /usr/local/bin/pyrunner-gui.py
+ln -sf /usr/local/bin/pyrunner.py /usr/local/bin/pyrunner
+ln -sf /usr/local/bin/pyrunner-gui.py /usr/local/bin/pyrunner-gui
+echo "PyRunner reinstalled and launchers refreshed."
 '
 ```
 
 ---
 
-### Uninstall (clean removal)
+### 🧹 Uninstall (Clean Removal)
 
 ```bash
-# Uninstall: removes launchers and install folder
 sudo bash -c 'set -euo pipefail
-rm -f /usr/local/bin/pyrunner /usr/local/bin/pyrunner-gui
-rm -rf /usr/local/bin/pyrunner
-echo "PyRunner uninstalled."
+rm -f /usr/local/bin/pyrunner /usr/local/bin/pyrunner-gui /usr/local/bin/pyrunner.py /usr/local/bin/pyrunner-gui.py
+echo "PyRunner fully removed."
 '
 ```
 
-### Option 2: Local alias (no sudo)
+---
+
+### Option 2: Local User Install (no sudo)
 
 ```bash
-# From the project directory
 chmod +x pyrunner.py pyrunner_gui.py
-mkdir -p ~/.local/bin/pyrunner
-cp pyrunner.py pyrunner_gui.py ~/.local/bin/pyrunner/
-chmod +x ~/.local/bin/pyrunner/pyrunner.py ~/.local/bin/pyrunner/pyrunner_gui.py
-ln -sf ~/.local/bin/pyrunner/pyrunner.py ~/.local/bin/pyrunner
-ln -sf ~/.local/bin/pyrunner/pyrunner_gui.py ~/.local/bin/pyrunner-gui
+mkdir -p ~/.local/bin
+cp pyrunner.py ~/.local/bin/pyrunner.py
+cp pyrunner_gui.py ~/.local/bin/pyrunner-gui.py
+ln -sf ~/.local/bin/pyrunner.py ~/.local/bin/pyrunner
+ln -sf ~/.local/bin/pyrunner-gui.py ~/.local/bin/pyrunner-gui
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
+---
+
 ### Dependencies
 
 ```bash
-# System packages (Debian/Ubuntu)
 sudo apt update
 sudo apt install -y python3-pip python3-venv python3-yaml
-
-# Python packages
 pip3 install --upgrade pip
 pip3 install pyyaml watchdog PyQt6
 ```
 
 ---
 
-## ✅ Verify Installation
+✅ **Verify Installation**
 
 ```bash
 pyrunner --version
