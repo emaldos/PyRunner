@@ -82,7 +82,7 @@ git clone https://github.com/emaldos/PyRunner.git
 cd PyRunner
 
 # Ensure executables
-chmod +x pyrunner.py pyrunner_gui.py
+sudo chmod +x pyrunner.py pyrunner_gui.py
 
 # Create a tidy folder in /usr/local/bin and copy both scripts there
 sudo mkdir -p /usr/local/bin/pyrunner
