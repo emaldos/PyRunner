@@ -137,35 +137,6 @@ echo "PyRunner uninstalled."
 '
 ```
 
----
-
-### One-shot full setup (deps + install + launchers)
-
-```bash
-# One-liner full setup: system deps, Python deps, copy, link
-bash -c 'set -euo pipefail
-# 1) System deps (Debian/Ubuntu). Skip if not needed.
-if command -v apt >/dev/null 2>&1; then
-  sudo apt update -y
-  sudo apt install -y python3-pip python3-venv python3-yaml
-fi
-# 2) Python deps (CLI + GUI + watch)
-python3 -m pip install --upgrade pip
-python3 -m pip install --upgrade pyyaml watchdog PyQt6
-# 3) Ensure scripts are executable locally
-chmod +x pyrunner.py pyrunner_gui.py
-# 4) Install to /usr/local/bin/pyrunner + link launchers
-sudo rm -f /usr/local/bin/pyrunner /usr/local/bin/pyrunner-gui
-sudo rm -rf /usr/local/bin/pyrunner
-sudo mkdir -p /usr/local/bin/pyrunner
-sudo cp pyrunner.py pyrunner_gui.py /usr/local/bin/pyrunner/
-sudo chmod +x /usr/local/bin/pyrunner/pyrunner.py /usr/local/bin/pyrunner/pyrunner_gui.py
-sudo ln -sf /usr/local/bin/pyrunner/pyrunner.py /usr/local/bin/pyrunner
-sudo ln -sf /usr/local/bin/pyrunner/pyrunner_gui.py /usr/local/bin/pyrunner-gui
-echo "✅ PyRunner installed and ready."
-'
-```
-
 ### Option 2: Local alias (no sudo)
 
 ```bash
